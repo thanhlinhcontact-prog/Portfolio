@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tạ Thành Linh - Portfolio</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom CSS -->
+  <style>
+    body {
+      margin: 0;
+      background-color: #0a0a0a;
+    }
+    .liquid-glass {
+      background: rgba(255, 255, 255, 0.01);
+      background-blend-mode: luminosity;
+      backdrop-filter: blur(4px);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .liquid-glass::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.4px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    @keyframes marquee-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    .animate-marquee-left { animation: marquee-left 22s linear infinite; }
+    .animate-marquee-right { animation: marquee-right 26s linear infinite; }
+
+    .noise-overlay::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.55;
+      mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      background-size: 240px 240px;
+    }
+  </style>
+
+  <!-- Import Map cho React và Lucide -->
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@18.2.0",
+        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+        "lucide-react": "https://esm.sh/lucide-react@0.300.0"
+      }
+    }
+  </script>
+
+  <!-- Babel để biên dịch JSX trực tiếp trên trình duyệt -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Code React -->
+  <script type="text/babel" data-type="module">
+    import React from 'react';
+    import { createRoot } from 'react-dom/client';
+    import {
+      ArrowUpRight,
+      Sparkle,
+      FileText,
+      FileSpreadsheet,
+      Palette,
+      PenTool,
+      BarChart,
+      Database,
+      LineChart,
+      Globe
+    } from 'lucide-react';
+
+    function App() {
+      const row1Icons = [FileText, FileSpreadsheet, Palette, PenTool, BarChart, Database, LineChart, Globe];
+      const row2Icons = [Globe, LineChart, Database, BarChart, PenTool, Palette, FileSpreadsheet, FileText];
+
+      return (
+        <div className="min-h-screen bg-[#0a0a0a] text-white font-sans antialiased flex flex-col items-center">
+          <div className="w-full px-4 sm:px-6 md:px-10 lg:px-14 py-6 sm:py-8 md:py-10 max-w-[1600px] mx-auto lg:h-screen flex flex-col">
+            {/* Header */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12 gap-6">
+              <div className="max-w-3xl">
+                <h1 className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] leading-[1.15] font-normal tracking-tight mb-4">
+                  Hi, I'm Tạ Thành Linh!
+                </h1>
+                <p className="text-sm md:text-[15px] leading-[1.6] text-white/60">
+                  A dynamic Logistics Intern eager to learn and ready to tackle new fields. Proud winner of the 3rd Prize in Startup with 'AI MatchTruck' and 3rd Prize in Scientific Research on 'Policies promoting taxi conversion to electric vehicles'.
+                </p>
+              </div>
+              <button className="liquid-glass rounded-full px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-medium whitespace-nowrap transition-transform hover:scale-105">
+                Let's Team Up Today
+              </button>
+            </div>
+
+            {/* Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 flex-1 min-h-0">
+              
+              {/* Column 1 - Background */}
+              <div className="rounded-2xl bg-black relative overflow-hidden flex flex-col justify-between p-6 md:p-8 group min-h-[400px] lg:min-h-0">
+                <video 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline 
+                  className="absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-700 group-hover:opacity-80"
+                  src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_150203_44a5bd32-516a-47ce-a077-8acbf9aa8991.mp4" 
+                />
+                <div className="relative z-10 flex justify-center items-center gap-3">
+                  <Sparkle className="h-3 w-3 text-white/70" strokeWidth={1.5} />
+                  <span className="uppercase tracking-[0.22em] text-[11px] text-white/70 font-medium">Background</span>
+                  <Sparkle className="h-3 w-3 text-white/70" strokeWidth={1.5} />
+                </div>
+                
+                <div className="relative z-10 mt-auto">
+                  <div className="grid grid-cols-[auto_auto_1fr_auto] gap-x-2 md:gap-x-3 gap-y-4 items-center text-sm md:text-[15px]">
+                    <span className="text-white/60 whitespace-nowrap">2024-Now</span>
+                    <Sparkle className="h-3 w-3 text-white/60 shrink-0" strokeWidth={1.5} />
+                    <span className="font-medium whitespace-normal">Head Barista & R&D</span>
+                    <span className="text-white/60 text-right whitespace-normal">Là Mai Coffee</span>
+
+                    <span className="text-white/60 whitespace-nowrap">2024</span>
+                    <Sparkle className="h-3 w-3 text-white/60 shrink-0" strokeWidth={1.5} />
+                    <span className="font-medium whitespace-normal">Supervisor & Marketing</span>
+                    <span className="text-white/60 text-right whitespace-normal">Selena Coffee</span>
+
+                    <span className="text-white/60 whitespace-nowrap">2023-2024</span>
+                    <Sparkle className="h-3 w-3 text-white/60 shrink-0" strokeWidth={1.5} />
+                    <span className="font-medium whitespace-normal">Leader Media</span>
+                    <span className="text-white/60 text-right whitespace-normal">Event Team</span>
+
+                    <span className="text-white/60 whitespace-nowrap">2023</span>
+                    <Sparkle className="h-3 w-3 text-white/60 shrink-0" strokeWidth={1.5} />
+                    <span className="font-medium whitespace-normal leading-tight">Transport Economics Student</span>
+                    <span className="text-white/60 text-right whitespace-normal leading-tight">Univ. of Transport & Communications</span>
+                  </div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              </div>
+
+              {/* Column 2 - Stacked */}
+              <div className="flex flex-col gap-4 md:gap-5 md:grid md:grid-rows-[auto_1fr] h-full">
+                
+                {/* My Vision */}
+                <div className="rounded-2xl bg-[#324444] p-5 md:p-6 relative overflow-hidden noise-overlay flex flex-col justify-between">
+                  <div className="flex justify-start items-center gap-3 mb-6 relative z-10">
+                    <Sparkle className="h-3 w-3 text-white/70" strokeWidth={1.5} />
+                    <span className="uppercase tracking-[0.22em] text-[11px] text-white/70 font-medium">My Vision</span>
+                    <Sparkle className="h-3 w-3 text-white/70" strokeWidth={1.5} />
+                  </div>
+                  <div className="relative z-10">
+                    <p className="text-[13px] sm:text-[13.5px] leading-[1.6] text-white/85 mb-4">
+                      "Despite not having direct experience in logistics yet, with a progressive spirit and seriousness, I constantly desire to learn, adapt quickly, and contribute my core values to the business."
+                    </p>
+                    <p className="text-xs text-white/60">
+                      <strong className="text-white font-medium">Tạ Thành Linh</strong>, Transport Economics Student — CPA: 3.43
+                    </p>
+                  </div>
+                </div>
+
+                {/* 135% */}
+                <div className="rounded-2xl bg-black relative overflow-hidden flex flex-col items-center justify-center p-8 min-h-[300px]">
+                  <video 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                    className="absolute inset-0 w-full h-full object-cover opacity-50"
+                    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_154543_d5b83fc1-9cea-44f3-b5e8-8f325935211a.mp4" 
+                  />
+                  <div className="relative z-10 flex flex-col items-center text-center">
+                    <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-light tracking-tight drop-shadow-lg mb-2">
+                      135%
+                    </h2>
+                    <p className="text-white/85 text-sm md:text-base">
+                      Peak sales growth achieved at Selena Coffee
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Column 3 - Stacked */}
+              <div className="flex flex-col gap-4 md:gap-5 md:grid md:grid-rows-[1fr_auto] h-full">
+                
+                {/* Daily Software */}
+                <div className="rounded-2xl bg-black relative overflow-hidden flex flex-col p-6 md:p-8 min-h-[300px]">
+                  <video 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                    className="absolute inset-0 w-full h-full object-cover opacity-40"
+                    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_153148_d7a3e1dd-e5d0-4ce6-8306-00d7522ecc44.mp4" 
+                  />
+                  <div className="relative z-10 flex justify-center items-center gap-3 mb-8">
+                    <Sparkle className="h-3 w-3 text-white/70" strokeWidth={1.5} />
+                    <span className="uppercase tracking-[0.22em] text-[11px] text-white/70 font-medium">Daily Software</span>
+                    <Sparkle className="h-3 w-3 text-white/70" strokeWidth={1.5} />
+                  </div>
+                  
+                  <div className="relative z-10 mt-auto w-full overflow-hidden" style={{ maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)' }}>
+                    {/* Row 1 - Left */}
+                    <div className="flex w-max mb-3">
+                      <div className="flex animate-marquee-left gap-3 pr-3">
+                        {[...row1Icons, ...row1Icons].map((Icon, idx) => (
+                          <div key={`r1-${idx}`} className="liquid-glass h-14 w-14 md:h-16 md:w-16 rounded-xl flex items-center justify-center shrink-0">
+                            <Icon className="h-6 w-6 text-white/80" strokeWidth={1.5} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    {/* Row 2 - Right */}
+                    <div className="flex w-max">
+                      <div className="flex animate-marquee-right gap-3 pr-3">
+                        {[...row2Icons, ...row2Icons].map((Icon, idx) => (
+                          <div key={`r2-${idx}`} className="liquid-glass h-14 w-14 md:h-16 md:w-16 rounded-xl flex items-center justify-center shrink-0">
+                            <Icon className="h-6 w-6 text-white/80" strokeWidth={1.5} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Reach Me */}
+                <div className="rounded-2xl bg-[#324444] p-5 md:p-6 relative overflow-hidden noise-overlay flex flex-col justify-between group cursor-pointer transition-transform hover:-translate-y-1">
+                  <div className="flex justify-between items-start mb-8 relative z-10">
+                    <div className="flex justify-start items-center gap-3">
+                      <Sparkle className="h-3 w-3 text-white/70" strokeWidth={1.5} />
+                      <span className="uppercase tracking-[0.22em] text-[11px] text-white/70 font-medium">Reach Me</span>
+                      <Sparkle className="h-3 w-3 text-white/70" strokeWidth={1.5} />
+                    </div>
+                    <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md transition-colors group-hover:bg-white/20">
+                      <ArrowUpRight className="h-5 w-5 text-white" strokeWidth={1.5} />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1 relative z-10">
+                    <a href="mailto:thanhlinh.contact@gmail.com" className="text-lg md:text-xl font-medium hover:text-white/80 transition-colors truncate">
+                      thanhlinh.contact@gmail.com
+                    </a>
+                    <a href="tel:0981290977" className="text-white/60 hover:text-white transition-colors">
+                      0981290977
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const root = createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
